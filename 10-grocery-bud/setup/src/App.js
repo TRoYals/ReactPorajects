@@ -3,8 +3,16 @@ import List from "./List";
 import Alert from "./Alert";
 
 function App() {
+  const getLocalStorage = () => {
+    let list = localStorage.getItem("items");
+    if (list) {
+      return JSON.parse(localStorage.getItem("items"));
+    } else {
+      return [];
+    }
+  };
   const [task, setTask] = useState("");
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(getLocalStorage());
   const [editId, setEditId] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [alert, setAlert] = useState({
@@ -48,6 +56,10 @@ function App() {
     showAlert(true, "success", "create done");
     setTask("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
   return (
     <section className="section-center">
       <form className="grocery-form" onSubmit={handleSubmit}>
