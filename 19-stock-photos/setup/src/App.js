@@ -2,17 +2,27 @@ import React, { useState, useEffect } from "react";
 
 import Photo from "./Photo";
 import SearchForm from "./components/FormSearch";
-// const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`
-const mainUrl = `https://api.unsplash.com/photos/`;
-const searchUrl = `https://api.unsplash.com/search/photos/`;
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("sfs");
+  const [loading, setLoading] = useState(false);
+  const [photos, setPhotos] = useState([]);
 
   return (
     <main>
-      <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <section className="photos">tests</section>
+      <SearchForm
+        loading={loading}
+        setLoading={setLoading}
+        photos={photos}
+        setPhotos={setPhotos}
+      />
+      <section className="photos">
+        <div className="photos-center">
+          {photos.map((photo, index) => {
+            return <Photo key={index} {...photo} />;
+          })}
+        </div>
+        {loading && <h2 className="loading">Loading...</h2>}
+      </section>
     </main>
   );
 }
