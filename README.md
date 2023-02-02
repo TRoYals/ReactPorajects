@@ -1,11 +1,6 @@
 # React Projects
 
 
-#### Support
-
-
-
-
 ## Corresponding Tutorial Topics
 
 #### useState
