@@ -61,7 +61,6 @@ const SearchForm = ({ loading, setLoading, photos, setPhotos }) => {
     e.preventDefault();
     setSearchTerm(searchValue.current.value);
     if (!searchTerm) {
-      console.log(searchTerm);
       fetchImages();
       return;
     }
