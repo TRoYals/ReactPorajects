@@ -12,6 +12,44 @@ const SearchForm = () => {
   const searchCocktail = () => {
     setSearchTerm(searchValue.current.value);
   };
+
+  const debounce = (fn, ms) => {
+    let timeout;
+    function wrapper() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fn.apply(this, arguments), ms);
+    }
+    return wrapper;
+  };
+
+  function throttle(func, delay = 2500) {
+    let isThrottled = false;
+    let thisArg, savedArgs;
+
+    const timeoutFunc = () => {
+      if (savedArgs === null) {
+        isThrottled = false;
+      } else {
+        func.apply(thisArg, savedArgs);
+        thisArg = savedArgs = null;
+        setTimeout(timeoutFunc, delay);
+      }
+    };
+
+    return function () {
+      if (isThrottled) {
+        thisArg = this;
+        savedArgs = arguments;
+        return;
+      }
+
+      func.apply(this, arguments);
+      isThrottled = true;
+
+      setTimeout(timeoutFunc, delay);
+    };
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -24,8 +62,9 @@ const SearchForm = () => {
             type="text"
             id="name"
             ref={searchValue}
-            onChange={searchCocktail}
+            onChange={throttle(searchCocktail, 1000)}
           />
+          <p>{searchValue.current.value}</p>
         </div>
       </form>
     </section>
