@@ -10,11 +10,12 @@ const Hero = () => {
           <h1>React Projects</h1>
           <p>
             Projects are the most practical way to learn any language, and
-            <span> React </span> is no exception. Solidify your knowledge of
-            React by creating these cool projects.
+            <span> React </span> is no exception. Here are some{" "}
+            <span>mini</span>
+            projects that I have created to learn and practice React.
           </p>
           <a
-            href="https://naglfar28.com"
+            href="https://portfolio.naglfar28.com"
             target="_blank"
             rel="noreferrer"
             className="btn hero-btn"
